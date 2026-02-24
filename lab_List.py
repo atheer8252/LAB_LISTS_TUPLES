@@ -1,24 +1,29 @@
-movies = [
-    ("The Shawshank Redemption", 1994, [9, 10, 10, 9, 8, 9]),
-    ("The Godfather", 1972, [10, 9, 8, 10, 9, 7]),
-    ("Pulp Fiction", 1994, [9, 8, 7, 8, 6, 5]),
-    ("The Dark Knight", 2008, [10, 9, 9, 8, 9, 8]),
-    ("Schindler's List", 1993, [8, 9, 9, 7, 6, 8]),
-    ("The Room", 2003, [1, 2, 3, 4, 5, 1])
-]
+def analyze_movies(movies):
+    """
+    This function takes a list of movies.
+    Each movie is represented as a tuple:
+    (title, release_year, list_of_ratings)
 
-# Create a list to store movies with average rating >= 6.0
-filtered_movies = []
+    It calculates the average rating for each movie,
+    filters out movies with average rating lower than 6.0,
+    then prints the remaining movies formatted with:
+    title, release year, and average rating.
+    """
 
-for title, year, ratings in movies:
-    average_rating = sum(ratings) / len(ratings)
-    
-    if average_rating >= 6.0:
-        filtered_movies.append((title, year, average_rating))
+    filtered_movies = []
 
-# Sort movies by average rating in descending order
-filtered_movies.sort(key=lambda movie: movie[2], reverse=True)
+    for movie in movies:
+        title = movie[0]
+        year = movie[1]
+        ratings = movie[2]
 
-# Display results
-for index, (title, year, avg) in enumerate(filtered_movies, start=1):
-    print(f"{index}. {title} ({year}) - Average rating: {avg:.2f} ★")
+        average_rating = sum(ratings) / len(ratings)
+
+        if average_rating >= 6.0:
+            filtered_movies.append((title, year, average_rating))
+
+    # ترتيب تنازلي حسب التقييم
+    filtered_movies.sort(key=lambda x: x[2], reverse=True)
+
+    for index, movie in enumerate(filtered_movies, start=1):
+        print(f"{index}. {movie[0]} ({movie[1]}) - Average rating: {movie[2]:.2f} ★")
